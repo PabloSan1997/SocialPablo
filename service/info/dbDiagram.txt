@@ -1,0 +1,30 @@
+
+
+Table Usuario{
+  id_user serial [primary key]
+  username varchar(100) [unique]
+  nickname varchar(100)
+  password varchar(5000)
+  idInfo interger
+}
+
+Table UsuarioInfo{
+  id_user_info serial [primary key]
+  descripcion varchar(5000)
+  url_perfil varchar(5000)
+}
+
+Table Imagen {
+  id_imagen serial [primary key]
+  image_description varchar(500)
+  url_image varchar(5000)
+  idUser interger
+}
+
+
+
+Ref : UsuarioInfo.id_user_info - Usuario.idInfo
+Ref : Imagen.idUser > Usuario.id_user
+
+
+//Inserte este codigo en https://dbdiagram.io/
