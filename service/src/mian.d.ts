@@ -13,8 +13,24 @@ interface UsuarioInfoInterface {
     url_perfil: string;
 }
 
+
+interface UsuarioRelationInfo extends UsuarioInterface{
+    usuarioInfo:UsuarioInfoInterface
+}
+
+interface UsuarioRelationImagenes extends UsuarioRelationInfo{
+    imagenes:ImagenInterface[]
+}
+
+
+
 interface ImagenInterface {
     id_imagen: number
     image_description: string;
     url_image: string;
 }
+
+interface ImagenRelationUser extends ImagenInterface{
+    usuario:UsuarioInfoInterface
+}
+
