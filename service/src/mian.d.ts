@@ -1,10 +1,21 @@
 
-
+// ------Usuario
 interface UsuarioInterface {
     id_user: number;
     username: string;
     nickname: string;
     password: string;
+}
+
+interface UsuarioDTO {
+    username: string;
+    nickname: string;
+    password: string;
+}
+
+interface UsuarioInfoDto {
+    descripcion: string;
+    url_perfil: string;
 }
 
 interface UsuarioInfoInterface {
@@ -14,15 +25,16 @@ interface UsuarioInfoInterface {
 }
 
 
-interface UsuarioRelationInfo extends UsuarioInterface{
-    usuarioInfo:UsuarioInfoInterface
+interface UsuarioRelationInfo extends UsuarioInterface {
+    usuarioInfo: UsuarioInfoInterface
 }
 
-interface UsuarioRelationImagenes extends UsuarioRelationInfo{
-    imagenes:ImagenInterface[]
+interface UsuarioRelationImagenes extends UsuarioRelationInfo {
+    imagenes: ImagenInterface[]
 }
 
 
+//------------Imagen------
 
 interface ImagenInterface {
     id_imagen: number
@@ -30,7 +42,7 @@ interface ImagenInterface {
     url_image: string;
 }
 
-interface ImagenRelationUser extends ImagenInterface{
-    usuario:UsuarioInfoInterface
+interface ImagenRelationUser extends ImagenInterface {
+    usuario: UsuarioInfoInterface
 }
 
