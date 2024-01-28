@@ -35,9 +35,18 @@ export class UsuarioController{
     async editInfoUser(req:Request, res:Response, next:NextFunction){
         try {
             const cuerpo:UsuarioInfoDto = req.body;
-            const {id_user_info} = req.params as {id_user_info:string}
-            const elemento = await servicioUsuario.editInfoUser(Number(id_user_info), cuerpo);
+            const {authorization} = req.headers as {authorization:string}
+            const elemento = await servicioUsuario.editInfoUser(authorization, cuerpo);
             res.json(elemento);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async login(req:Request, res:Response, next:NextFunction){
+        try {
+            const datos:LoginInterface = req.body;
+            const respuesta = await servicioUsuario.loginUser(datos);
+            res.json(respuesta);
         } catch (error) {
             next(error);
         }

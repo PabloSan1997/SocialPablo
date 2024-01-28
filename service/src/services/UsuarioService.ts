@@ -4,6 +4,8 @@ import { AppDataSource } from "../dbConfig/config";
 import bcrypt from 'bcrypt';
 import Boom from '@hapi/boom';
 import { mostrarUsuarioUno } from "../utilities/formatoRespuesta";
+import { envVariables } from "../utilities/envVariables";
+import jwt from 'jsonwebtoken';
 
 const reUsuario = AppDataSource.getRepository(Usuario);
 const reUsuarioInfo = AppDataSource.getRepository(UsuarioInfo);
@@ -37,14 +39,39 @@ export class UsuarioService {
         await reUsuario.update({ id_user }, usuario);
         return mostrarUsuarioUno(usuario);
     }
-    async editInfoUser(id_user_info: number, data: UsuarioInfoDto) {
-        const buscar = await reUsuarioInfo.findOne({
-            where: { id_user_info }
+    async editInfoUser(token:string, data: UsuarioInfoDto) {
+        const loginResponse = await this.infoToken(token);
+        const datos = await reUsuario.findOne({
+            where:{
+                id_user:loginResponse.id_user,
+                username:loginResponse.username
+            }, 
+            relations:{usuarioInfo:true}
         });
-        if (!buscar) throw Boom.notFound('No se encontro usuario');
-        buscar.url_perfil = data.url_perfil;
-        buscar.descripcion = data.descripcion;
-        await reUsuarioInfo.save(buscar);
-        return buscar;
+        if(!datos) throw Boom.badRequest('No tienes permiso');
+        const info = datos.usuarioInfo;
+        info.descripcion = data.descripcion;
+        info.url_perfil = data.url_perfil;
+        await reUsuarioInfo.save(info);
+        return info;
+
+    }
+    async loginUser(loginBody:LoginInterface):Promise<LoginRespose>{
+        const usuario = await reUsuario.findOne({where:{username:loginBody.username}});
+        if(!usuario) throw Boom.badRequest('No se encontro usuario');
+        const checar = await bcrypt.compare(loginBody.password, usuario.password);
+        if(!checar) throw Boom.badRequest('Contraseña incorrecta');
+        usuario.password = await bcrypt.hash(loginBody.password,5);
+        const respuesta:TokenResponse = {
+            id_user:usuario.id_user,
+            username:usuario.username
+        }
+        await reUsuario.save(usuario);
+        const token = jwt.sign(respuesta, envVariables.key_jwt!);
+        return {token};
+    }
+    async infoToken(token:string){
+        const datos = jwt.verify(token, envVariables.key_jwt!) as TokenResponse;
+        return datos;
     }
 }

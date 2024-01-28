@@ -13,6 +13,20 @@ interface UsuarioDTO {
     password: string;
 }
 
+interface LoginInterface {
+    username: string;
+    password: string;
+}
+
+interface LoginRespose{
+    token:string;
+}
+
+interface TokenResponse{
+    id_user:number;
+    username:string;
+}
+
 interface UsuarioInfoDto {
     descripcion: string;
     url_perfil: string;
