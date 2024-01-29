@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { UsuarioInfo } from './UsuarioInfo';
 import { Imagen } from './Imagen';
+import { Comentario } from './Comentario';
 
 
 @Entity()
@@ -23,4 +24,7 @@ export class Usuario implements UsuarioInterface {
 
     @OneToMany(() => Imagen, imagenes => imagenes.usuario)
     imagenes: Imagen[];
+
+    @OneToMany(()=>Comentario, comentario=>comentario.usuario)
+    comentarios:Comentario[];
 }

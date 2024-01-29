@@ -1,5 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
 import { Usuario } from './Usuario';
+import { Comentario } from './Comentario';
 
 
 @Entity()
@@ -17,4 +18,6 @@ export class Imagen implements ImagenInterface{
     @JoinColumn({name:'idUser'})
     usuario:Usuario;
 
+    @OneToMany(()=>Comentario, comentario => comentario.imagenes)
+    comentario:Comentario[];
 }

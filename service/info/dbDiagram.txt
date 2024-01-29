@@ -21,10 +21,17 @@ Table Imagen {
   idUser interger
 }
 
+Table Comentarios{
+  id_comentario serial [primary key]
+  comentario varchar(500)
+  idImagen interger
+  idUser interger
+}
 
 
 Ref : UsuarioInfo.id_user_info - Usuario.idInfo
 Ref : Imagen.idUser > Usuario.id_user
-
+Ref : Comentarios.idImagen > Imagen.id_imagen
+Ref : Comentarios.idUser > Usuario.id_user
 
 //Inserte este codigo en https://dbdiagram.io/

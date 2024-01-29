@@ -3,6 +3,7 @@ import { envVariables } from '../utilities/envVariables';
 import { Usuario } from './Models/Usuario';
 import { UsuarioInfo } from './Models/UsuarioInfo';
 import { Imagen } from './Models/Imagen';
+import { Comentario } from './Models/Comentario';
 
 
 export const AppDataSource = new DataSource({
@@ -10,5 +11,5 @@ export const AppDataSource = new DataSource({
     url:envVariables.url_database,
     synchronize: true,
     logging: true,
-    entities:[Usuario, UsuarioInfo, Imagen]
+    entities:[Usuario, UsuarioInfo, Imagen, Comentario]
 });
