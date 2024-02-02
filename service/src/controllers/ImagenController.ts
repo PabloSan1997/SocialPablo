@@ -21,4 +21,13 @@ export class ImagenController {
             next(error);
         }
     }
+    async agregarImagen(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { authorization } = req.headers as {authorization:string};
+            const imagen = await servicio.addImage(authorization, req.body);
+            res.json(imagen);
+        } catch (error) {
+            next(error);
+        }
+    }
 }

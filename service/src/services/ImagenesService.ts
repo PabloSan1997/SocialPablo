@@ -3,8 +3,11 @@ import { Usuario } from "../dbConfig/Models/Usuario";
 import { AppDataSource } from "../dbConfig/config";
 import Boom from '@hapi/boom';
 import { mostrarUsuarioUno } from "../utilities/formatoRespuesta";
+import { UsuarioService } from "./UsuarioService";
 
 const reImagen = AppDataSource.getRepository(Imagen);
+const reUsuario = AppDataSource.getRepository(Usuario);
+const userService = new UsuarioService();
 
 export class ImagenesService {
     async leerImagene(id_imagen: string | null = null) {
@@ -36,5 +39,15 @@ export class ImagenesService {
             }
         });
         return mostrar;
+    }
+    async addImage(token: string, imagen: AddImagen) {
+        console.log(token);
+        const dataUsar = await userService.infoToken(token);
+        const usuario = await reUsuario.findOneBy({ id_user: dataUsar.id_user });
+        const imagennueva = reImagen.create(imagen);
+        if (!usuario) throw Boom.badRequest('Tienes permiso para esta accion');
+        imagennueva.usuario = usuario;
+        await reImagen.save(imagennueva);
+        return imagennueva;
     }
 }

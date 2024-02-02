@@ -50,6 +50,11 @@ interface UsuarioRelationImagenes extends UsuarioRelationInfo {
 
 //------------Imagen------
 
+interface AddImagen{
+    image_description: string;
+    url_image: string;
+}
+
 interface ImagenInterface {
     id_imagen: string;
     image_description: string;
