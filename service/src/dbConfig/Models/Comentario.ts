@@ -4,8 +4,8 @@ import { Usuario } from './Usuario';
 
 @Entity()
 export class Comentario{
-    @PrimaryGeneratedColumn('increment')
-    id_comentario:number;
+    @PrimaryGeneratedColumn('uuid')
+    id_comentario:string;
 
     @Column()
     comentario:string;

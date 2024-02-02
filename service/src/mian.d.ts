@@ -1,7 +1,7 @@
 
 // ------Usuario
 interface UsuarioInterface {
-    id_user: number;
+    id_user: string;
     username: string;
     nickname: string;
     password: string;
@@ -23,7 +23,7 @@ interface LoginRespose{
 }
 
 interface TokenResponse{
-    id_user:number;
+    id_user:string;
     username:string;
 }
 
@@ -33,7 +33,7 @@ interface UsuarioInfoDto {
 }
 
 interface UsuarioInfoInterface {
-    id_user_info: number;
+    id_user_info: string;
     descripcion: string;
     url_perfil: string;
 }
@@ -51,7 +51,7 @@ interface UsuarioRelationImagenes extends UsuarioRelationInfo {
 //------------Imagen------
 
 interface ImagenInterface {
-    id_imagen: number
+    id_imagen: string;
     image_description: string;
     url_image: string;
 }

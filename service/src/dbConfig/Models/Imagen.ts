@@ -5,8 +5,8 @@ import { Comentario } from './Comentario';
 
 @Entity()
 export class Imagen implements ImagenInterface{
-    @PrimaryGeneratedColumn('increment')
-    id_imagen: number;
+    @PrimaryGeneratedColumn('uuid')
+    id_imagen: string;
 
     @Column({length:500})
     image_description: string;

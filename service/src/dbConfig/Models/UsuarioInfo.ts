@@ -4,8 +4,8 @@ import { Usuario } from './Usuario';
 
 @Entity()
 export class UsuarioInfo implements UsuarioInfoInterface{
-    @PrimaryGeneratedColumn('increment')
-    id_user_info: number;
+    @PrimaryGeneratedColumn('uuid')
+    id_user_info: string;
 
     @Column({length:500})
     descripcion: string;

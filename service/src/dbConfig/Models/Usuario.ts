@@ -6,8 +6,8 @@ import { Comentario } from './Comentario';
 
 @Entity()
 export class Usuario implements UsuarioInterface {
-    @PrimaryGeneratedColumn('increment')
-    id_user: number;
+    @PrimaryGeneratedColumn('uuid')
+    id_user: string;
 
     @Column({ length: 100, unique: true })
     username: string;
