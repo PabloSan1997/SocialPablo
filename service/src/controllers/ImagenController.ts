@@ -23,17 +23,27 @@ export class ImagenController {
     }
     async agregarImagen(req: Request, res: Response, next: NextFunction) {
         try {
-            const { authorization } = req.headers as {authorization:string};
+            const { authorization } = req.headers as { authorization: string };
             const imagen = await servicio.addImage(authorization, req.body);
             res.status(201).json(imagen);
         } catch (error) {
             next(error);
         }
     }
-    async addComentario(req: Request, res: Response, next: NextFunction){
+    async deleteImagen(req: Request, res: Response, next: NextFunction) {
         try {
-            const { authorization } = req.headers as {authorization:string};
-            const {id_imagen} = req.params;
+            const { authorization } = req.headers as { authorization: string };
+            const { id_imagen } = req.params;
+            await servicio.deleteImage(authorization, id_imagen);
+            res.sendStatus(204);
+        } catch (error) {
+            next(error);
+        }
+    }
+    async addComentario(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { authorization } = req.headers as { authorization: string };
+            const { id_imagen } = req.params;
             const comentario = await servicio.addComent(authorization, id_imagen, req.body);
             res.status(201).json(comentario);
         } catch (error) {

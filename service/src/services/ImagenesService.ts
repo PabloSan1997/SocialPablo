@@ -26,10 +26,10 @@ export class ImagenesService {
                 where: { imagenes: imagenes },
                 relations: { usuario: true }
             });
-            const comentariosMostrar = comentarios.map(c=>{
+            const comentariosMostrar = comentarios.map(c => {
                 return {
                     ...c,
-                    usuario:mostrarUsuarioUno(c.usuario)
+                    usuario: mostrarUsuarioUno(c.usuario)
                 }
             });
             const imagen = {
@@ -41,8 +41,7 @@ export class ImagenesService {
         }
         const imagenes = await reImagen.find({
             relations: {
-                usuario: true,
-                comentario: true
+                usuario: true
             }
         });
         const mostrar = imagenes.map(i => {
@@ -61,6 +60,13 @@ export class ImagenesService {
         imagennueva.usuario = usuario;
         await reImagen.save(imagennueva);
         return imagennueva;
+    }
+    async deleteImage(token: string, id_imagen: string) {
+        const userData = await userService.infoToken(token);
+        const imagen = await reImagen.findOne({ where: { id_imagen }, relations: { usuario: true } });
+        if (!imagen) throw Boom.notFound('No se encontro imagen');
+        if (userData.id_user !== imagen.usuario.id_user) throw Boom.badRequest('No tienes permiso para esta accion');
+        reImagen.delete({ id_imagen });
     }
     async addComent(token: string, id_imagen: string, comentario: AddComentario) {
         const info = await userService.infoToken(token);

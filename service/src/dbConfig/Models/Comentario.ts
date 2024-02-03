@@ -10,11 +10,11 @@ export class Comentario{
     @Column()
     comentario:string;
 
-    @ManyToOne(()=>Imagen, imagenes=>imagenes.usuario)
+    @ManyToOne(()=>Imagen, imagenes=>imagenes.usuario, {onDelete:'CASCADE'})
     @JoinColumn({name:'idImagen'})
     imagenes:Imagen;
 
-    @ManyToOne(()=>Usuario, usuario=>usuario.comentarios)
+    @ManyToOne(()=>Usuario, usuario=>usuario.comentarios, {onDelete:'CASCADE'})
     @JoinTable({name:'idUser'})
     usuario:Usuario;
 }

@@ -16,8 +16,7 @@ export class UsuarioService {
             where: { id_user },
             relations: {
                 usuarioInfo: true,
-                imagenes:true,
-                comentarios:true
+                imagenes:true
             }
         });
         if (!oneUser) throw Boom.notFound('No se encontro usuario');
