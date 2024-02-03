@@ -18,13 +18,13 @@ interface LoginInterface {
     password: string;
 }
 
-interface LoginRespose{
-    token:string;
+interface LoginRespose {
+    token: string;
 }
 
-interface TokenResponse{
-    id_user:string;
-    username:string;
+interface TokenResponse {
+    id_user: string;
+    username: string;
 }
 
 interface UsuarioInfoDto {
@@ -50,7 +50,7 @@ interface UsuarioRelationImagenes extends UsuarioRelationInfo {
 
 //------------Imagen------
 
-interface AddImagen{
+interface AddImagen {
     image_description: string;
     url_image: string;
 }
@@ -65,3 +65,10 @@ interface ImagenRelationUser extends ImagenInterface {
     usuario: UsuarioInfoInterface
 }
 
+interface AddComentario {
+    comentario: string;
+}
+interface ComentarioInterface {
+    id_comentario: string;
+    comentario: string;
+}

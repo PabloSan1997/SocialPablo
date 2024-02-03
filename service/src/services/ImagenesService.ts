@@ -4,10 +4,12 @@ import { AppDataSource } from "../dbConfig/config";
 import Boom from '@hapi/boom';
 import { mostrarUsuarioUno } from "../utilities/formatoRespuesta";
 import { UsuarioService } from "./UsuarioService";
+import { Comentario } from "../dbConfig/Models/Comentario";
 
 const reImagen = AppDataSource.getRepository(Imagen);
 const reUsuario = AppDataSource.getRepository(Usuario);
 const userService = new UsuarioService();
+const reComentario = AppDataSource.getRepository(Comentario);
 
 export class ImagenesService {
     async leerImagene(id_imagen: string | null = null) {
@@ -15,14 +17,25 @@ export class ImagenesService {
             const imagenes = await reImagen.findOne({
                 where: { id_imagen },
                 relations: {
-                    usuario: true,
-                    comentario: true
+                    usuario: true
                 }
             });
             if (!imagenes) throw Boom.notFound('No se encontró infromacion');
+
+            const comentarios = await reComentario.find({
+                where: { imagenes: imagenes },
+                relations: { usuario: true }
+            });
+            const comentariosMostrar = comentarios.map(c=>{
+                return {
+                    ...c,
+                    usuario:mostrarUsuarioUno(c.usuario)
+                }
+            });
             const imagen = {
                 ...imagenes,
-                usuario: mostrarUsuarioUno(imagenes.usuario)
+                usuario: mostrarUsuarioUno(imagenes.usuario),
+                comentarios: comentariosMostrar
             }
             return imagen;
         }
@@ -41,7 +54,6 @@ export class ImagenesService {
         return mostrar;
     }
     async addImage(token: string, imagen: AddImagen) {
-        console.log(token);
         const dataUsar = await userService.infoToken(token);
         const usuario = await reUsuario.findOneBy({ id_user: dataUsar.id_user });
         const imagennueva = reImagen.create(imagen);
@@ -49,5 +61,25 @@ export class ImagenesService {
         imagennueva.usuario = usuario;
         await reImagen.save(imagennueva);
         return imagennueva;
+    }
+    async addComent(token: string, id_imagen: string, comentario: AddComentario) {
+        const info = await userService.infoToken(token);
+        const usuario = await reUsuario.findOne({
+            where: {
+                id_user: info.id_user
+            }
+        });
+        if (!usuario) throw Boom.badRequest('No tienes permiso para esta accion');
+        const imagen = await reImagen.findOne({ where: { id_imagen } });
+        if (!imagen) throw Boom.badRequest('No tienes permiso para esta acion');
+        const crearComentario = reComentario.create(comentario);
+        crearComentario.imagenes = imagen;
+        crearComentario.usuario = usuario;
+        await reComentario.save(crearComentario);
+        const mostrar = {
+            ...crearComentario,
+            usuario: mostrarUsuarioUno(crearComentario.usuario)
+        }
+        return mostrar;
     }
 }

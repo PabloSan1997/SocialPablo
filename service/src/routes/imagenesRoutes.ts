@@ -8,3 +8,4 @@ export const imagenesRoutes = express.Router();
 imagenesRoutes.get('/', controller.leerImagenes);
 imagenesRoutes.get('/:id_imagen', controller.leerUnaImagen);
 imagenesRoutes.post('/nuevaImagen', controller.agregarImagen);
+imagenesRoutes.post('/comentario/:id_imagen', controller.addComentario);

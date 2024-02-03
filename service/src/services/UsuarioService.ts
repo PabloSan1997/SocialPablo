@@ -16,7 +16,8 @@ export class UsuarioService {
             where: { id_user },
             relations: {
                 usuarioInfo: true,
-                imagenes:true
+                imagenes:true,
+                comentarios:true
             }
         });
         if (!oneUser) throw Boom.notFound('No se encontro usuario');
@@ -45,9 +46,9 @@ export class UsuarioService {
         return mostrarUsuarioUno(nuevo);
     }
     async addInfoUser(id_user: string, newInfo: UsuarioInfoDto) {
-        const usuario = await reUsuario.findOne({ where: { id_user } });
+        const usuario = await reUsuario.findOne({ where: { id_user }, relations:{usuarioInfo:true} });
         if (!usuario) throw Boom.notFound('No se encontro usuario');
-
+        if(usuario.usuarioInfo) throw Boom.badRequest('Ya existe informacion');
         const nuevoInfo = reUsuarioInfo.create(newInfo);
         await reUsuarioInfo.save(nuevoInfo);
         usuario.usuarioInfo = nuevoInfo;
