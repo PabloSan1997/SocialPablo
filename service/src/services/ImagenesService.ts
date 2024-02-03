@@ -88,4 +88,11 @@ export class ImagenesService {
         }
         return mostrar;
     }
+    async deleteComment(token: string, id_comentario: string) {
+        const info = await userService.infoToken(token);
+        const comentario = await reComentario.findOne({ where: { id_comentario }, relations: { usuario: true } });
+        if (!comentario) throw Boom.notFound('No se encontro comentario');
+        if (comentario.usuario.id_user !== info.id_user) throw Boom.badRequest('No tienes permiso para esta accion');
+        reComentario.delete({ id_comentario });
+    }
 }

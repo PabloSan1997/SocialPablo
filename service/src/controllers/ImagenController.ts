@@ -50,4 +50,14 @@ export class ImagenController {
             next(error);
         }
     }
+    async deleteComentario(req: Request, res: Response, next: NextFunction){
+        try {
+            const { authorization } = req.headers as { authorization: string };
+            const { id_comentario } = req.params;
+            await servicio.deleteComment(authorization, id_comentario);
+            res.sendStatus(204);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
