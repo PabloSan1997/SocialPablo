@@ -5,12 +5,14 @@ interface UsuarioInterface {
     username: string;
     nickname: string;
     password: string;
+    url_perfil: string;
 }
 
 interface UsuarioDTO {
     username: string;
     nickname: string;
     password: string;
+    url_perfil: string;
 }
 
 interface LoginInterface {
@@ -35,7 +37,6 @@ interface UsuarioInfoDto {
 interface UsuarioInfoInterface {
     id_user_info: string;
     descripcion: string;
-    url_perfil: string;
 }
 
 

@@ -10,9 +10,6 @@ export class UsuarioInfo implements UsuarioInfoInterface{
     @Column({length:500})
     descripcion: string;
 
-    @Column({length:5000})
-    url_perfil: string;
-
     @OneToOne(()=>Usuario, usuario=>usuario.usuarioInfo)
     usuario:Usuario;
 }

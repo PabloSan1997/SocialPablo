@@ -20,6 +20,7 @@ export class ImagenesService {
                     usuario: true
                 }
             });
+            
             if (!imagenes) throw Boom.notFound('No se encontró infromacion');
 
             const comentarios = await reComentario.find({

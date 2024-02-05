@@ -18,6 +18,9 @@ export class Usuario implements UsuarioInterface {
     @Column({ length: 5000 })
     password: string;
 
+    @Column({ length: 5000 })
+    url_perfil: string;
+
     @OneToOne(() => UsuarioInfo, usuarioInfo => usuarioInfo.usuario, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'idInfo' })
     usuarioInfo: UsuarioInfo;
@@ -25,6 +28,6 @@ export class Usuario implements UsuarioInterface {
     @OneToMany(() => Imagen, imagenes => imagenes.usuario)
     imagenes: Imagen[];
 
-    @OneToMany(()=>Comentario, comentario=>comentario.usuario)
-    comentarios:Comentario[];
+    @OneToMany(() => Comentario, comentario => comentario.usuario)
+    comentarios: Comentario[];
 }

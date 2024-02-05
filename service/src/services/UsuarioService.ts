@@ -66,7 +66,6 @@ export class UsuarioService {
         if (!datos) throw Boom.badRequest('No tienes permiso');
         const info = datos.usuarioInfo;
         info.descripcion = data.descripcion;
-        info.url_perfil = data.url_perfil;
         await reUsuarioInfo.save(info);
         return info;
 
