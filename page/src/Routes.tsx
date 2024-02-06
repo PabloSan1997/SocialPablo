@@ -1,11 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useRoutes, HashRouter } from 'react-router-dom';
+import { useRoutes, HashRouter, Navigate } from 'react-router-dom';
 import { Login } from './layouts/Login';
 import { Home } from './layouts/Home';
 import { Profile } from './layouts/Profile';
 import { CreateUser } from './layouts/CreateUser';
 import { AddImage } from './layouts/AddImage';
 import { Imagefull } from './layouts/Imagefull';
+import { useCookies } from 'react-cookie';
 
 export const rutas = {
     login: '/login',
@@ -17,7 +18,7 @@ export const rutas = {
     image: '/image/:id_imagen'
 }
 
-const rutasLista = [
+const rutasLista = (data: string) => [
     {
         path: rutas.login,
         element: <Login />
@@ -31,6 +32,10 @@ const rutasLista = [
         element: <Profile />
     },
     {
+        path: rutas.profileid,
+        element: <Profile />
+    },
+    {
         path: rutas.create,
         element: <CreateUser />
     },
@@ -41,11 +46,16 @@ const rutasLista = [
     {
         path: rutas.image,
         element: <Imagefull />
+    },
+    {
+        path: '/',
+        element: <Navigate to={data ? rutas.home : rutas.login} />
     }
 ];
 
 export function MisRutas({ children }: Children) {
-    const Rutas = () => useRoutes(rutasLista);
+    const [cookies] = useCookies(['myToken']);
+    const Rutas = () => useRoutes(rutasLista(cookies.myToken));
     return (
         <HashRouter>
             {children}
