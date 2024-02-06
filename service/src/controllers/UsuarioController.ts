@@ -6,8 +6,8 @@ const servicioUsuario = new UsuarioService();
 export class UsuarioController {
     async readOneUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const { id_user } = req.params as { id_user: string };
-            const datos = await servicioUsuario.readUser(id_user);
+            const { username } = req.params as { username: string };
+            const datos = await servicioUsuario.readUser(username);
             res.json(datos);
         } catch (error) {
             next(error);

@@ -11,9 +11,9 @@ const reUsuario = AppDataSource.getRepository(Usuario);
 const reUsuarioInfo = AppDataSource.getRepository(UsuarioInfo);
 
 export class UsuarioService {
-    async readUser(id_user: string) {
+    async readUser(username: string) {
         const oneUser = await reUsuario.findOne({
-            where: { id_user },
+            where: { username },
             relations: {
                 usuarioInfo: true,
                 imagenes:true

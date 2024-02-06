@@ -6,7 +6,7 @@ export const usuarioRouter = express.Router();
 const controller = new UsuarioController();
 
 usuarioRouter.get('/', controller.readUserToken);
-usuarioRouter.get('/:id_user', controller.readOneUser);
+usuarioRouter.get('/:username', controller.readOneUser);
 usuarioRouter.post('/addNewUser', controller.addUser);
 usuarioRouter.post('/addNewInfo/:id_user', controller.addUserInfo);
 usuarioRouter.put('/', controller.editInfoUser);
