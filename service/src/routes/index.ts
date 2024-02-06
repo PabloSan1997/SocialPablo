@@ -6,7 +6,7 @@ const indexRouter = express.Router();
 
 
 export function createApi(app:express.Express){
-    app.use('/api/v1', indexRouter);
-    indexRouter.use('/user', usuarioRouter);
-    indexRouter.use('/imagen', imagenesRoutes);
+	app.use('/api/v1', indexRouter);
+	indexRouter.use('/user', usuarioRouter);
+	indexRouter.use('/imagen', imagenesRoutes);
 }

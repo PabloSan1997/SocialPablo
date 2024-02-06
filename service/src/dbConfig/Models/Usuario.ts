@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { UsuarioInfo } from './UsuarioInfo';
 import { Imagen } from './Imagen';
@@ -7,27 +8,27 @@ import { Comentario } from './Comentario';
 @Entity()
 export class Usuario implements UsuarioInterface {
     @PrimaryGeneratedColumn('uuid')
-    id_user: string;
+    	id_user: string;
 
     @Column({ length: 100, unique: true })
-    username: string;
+    	username: string;
 
     @Column({ length: 100 })
-    nickname: string;
+    	nickname: string;
 
     @Column({ length: 5000 })
-    password: string;
+    	password: string;
 
     @Column({ length: 5000 })
-    url_perfil: string;
+    	url_perfil: string;
 
     @OneToOne(() => UsuarioInfo, usuarioInfo => usuarioInfo.usuario, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'idInfo' })
-    usuarioInfo: UsuarioInfo;
+    	usuarioInfo: UsuarioInfo;
 
     @OneToMany(() => Imagen, imagenes => imagenes.usuario)
-    imagenes: Imagen[];
+    	imagenes: Imagen[];
 
     @OneToMany(() => Comentario, comentario => comentario.usuario)
-    comentarios: Comentario[];
+    	comentarios: Comentario[];
 }

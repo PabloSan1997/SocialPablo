@@ -7,9 +7,9 @@ import { Comentario } from './Models/Comentario';
 
 
 export const AppDataSource = new DataSource({
-    type:'postgres',
-    url:envVariables.url_database,
-    synchronize: true,
-    logging: true,
-    entities:[Usuario, UsuarioInfo, Imagen, Comentario]
+	type:'postgres',
+	url:envVariables.url_database,
+	synchronize: true,
+	logging: true,
+	entities:[Usuario, UsuarioInfo, Imagen, Comentario]
 });
