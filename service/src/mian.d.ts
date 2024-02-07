@@ -32,7 +32,6 @@ interface TokenResponse {
 
 interface UsuarioInfoDto {
     descripcion: string;
-    url_perfil: string;
 }
 
 interface UsuarioInfoInterface {
