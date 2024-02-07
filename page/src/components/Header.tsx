@@ -10,13 +10,13 @@ export function Header() {
       <h1 className="ml-5"><img className='w-10' src={logo} alt="" /></h1>
       {locacion.pathname === rutas.login?(
         <button
-        className="text-green-50 ml-auto mr-5 text-lg"
+        className="text-green-50 ml-auto mr-5 text-lg hover:underline"
         onClick={()=>navegar(rutas.create)}
         >Crear Cuenta</button>
       ):null}
       {locacion.pathname === rutas.create?(
         <button
-        className="text-green-50 ml-auto mr-5 text-lg"
+        className="text-green-50 ml-auto mr-5 text-lg hover:underline"
         onClick={()=>navegar(rutas.login)}
         >Login</button>
       ):null}

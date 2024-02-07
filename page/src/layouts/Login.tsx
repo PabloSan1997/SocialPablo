@@ -23,7 +23,7 @@ export function Login() {
           className="text-miAzul-50 mb-1 text-lg"
         >Contraseña</label>
         <input
-          type="text"
+          type="password"
           id="password"
           placeholder="Escribir"
           className="mb-5 p-1 px-2 rounded-md outline-none bg-miGris-800 placeholder:text-miGris-400 text-miAzul-50"
