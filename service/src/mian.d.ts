@@ -22,6 +22,7 @@ interface LoginInterface {
 
 interface LoginRespose {
     token: string;
+    nickname:string;
 }
 
 interface TokenResponse {

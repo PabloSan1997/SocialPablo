@@ -82,7 +82,7 @@ export class UsuarioService {
 		};
 		await reUsuario.save(usuario);
 		const token = jwt.sign(respuesta, envVariables.key_jwt!);
-		return { token };
+		return { token, nickname:usuario.nickname };
 	}
 	async infoToken(token: string) {
 		const datos = jwt.verify(token, envVariables.key_jwt!) as TokenResponse;
