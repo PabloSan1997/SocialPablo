@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useAppSelector } from "../toolkit/store";
 import { Redirigir } from "./Redirigir";
 import { rutas } from "../Routes";

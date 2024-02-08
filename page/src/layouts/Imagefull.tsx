@@ -1,5 +1,4 @@
 
-import React from "react";
 import { routesStorage } from "../utilities/userStorage";
 import { useLocation } from "react-router-dom";
 import { Redirigir } from "./Redirigir";
