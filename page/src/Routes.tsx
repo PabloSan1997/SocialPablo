@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 import { useRoutes, HashRouter, Navigate } from 'react-router-dom';
 import { Login } from './layouts/Login';
@@ -7,6 +8,10 @@ import { CreateUser } from './layouts/CreateUser';
 import { AddImage } from './layouts/AddImage';
 import { Imagefull } from './layouts/Imagefull';
 import { useCookies } from 'react-cookie';
+import React from 'react';
+import { agregarToken } from './toolkit/slices/socialSice';
+import { useAppDispatch, useAppSelector } from './toolkit/store';
+import { userStorage } from './utilities/userStorage';
 
 export const rutas = {
     login: '/login',
@@ -54,7 +59,19 @@ const rutasLista = (data: string) => [
 ];
 
 export function MisRutas({ children }: Children) {
-    const [cookies] = useCookies(['myToken']);
+    const [cookies, setCookies] = useCookies(['myToken']);
+    const dispatch = useAppDispatch();
+    const stateSocial = useAppSelector(state => state.social);
+    React.useEffect(() => {
+        if (cookies.myToken) {
+            dispatch(agregarToken({ token: cookies.myToken }));
+        } else {
+            userStorage.guardar('');
+        }
+    }, []);
+    React.useEffect(() => {
+        setCookies('myToken', stateSocial.token, { maxAge: 1000 });
+    }, [stateSocial.token]);
     const Rutas = () => useRoutes(rutasLista(cookies.myToken));
     return (
         <HashRouter>

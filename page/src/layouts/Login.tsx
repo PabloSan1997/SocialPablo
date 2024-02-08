@@ -1,9 +1,17 @@
 
 import React from "react";
+import { useAppDispatch } from "../toolkit/store";
+import { loginExtraReducer } from "../toolkit/slices/socialExtraReducers";
 
 export function Login() {
+  const dispatch = useAppDispatch();
+  const subir = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(loginExtraReducer({ username: 'pablo123', password: 'admin123' }));
+  }
   return (
     <form
+      onSubmit={subir}
       className="border-2 border-miAzul-700 w-1/2 flex flex-col m-auto mt-20 bg-miAzul-950 p-2 rounded-lg"
     >
       <h2 className="text-miAzul-50 text-3xl m-auto">Login</h2>

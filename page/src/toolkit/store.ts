@@ -1,8 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { socialReducer } from './slices/socialSice';
 
 export const store = configureStore({
-    reducer:{}
+    reducer:{
+        social:socialReducer
+    }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
