@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loginExtraReducer } from './socialExtraReducers';
+import { loginExtraReducer, readImagesExtraReduce } from './socialExtraReducers';
 import { userStorage } from '../../utilities/userStorage';
 
 
@@ -57,6 +57,10 @@ const socialSlice = createSlice({
         builder.addCase(loginExtraReducer.rejected, (state, action) => {
             const texto = action.error.message;
             state.textoError = texto ? texto : 'Error';
+        });
+
+        builder.addCase(readImagesExtraReduce.fulfilled, (state, action)=>{
+            state.imagenes = [...action.payload]
         });
     }
 });

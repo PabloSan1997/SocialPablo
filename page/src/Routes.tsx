@@ -12,6 +12,7 @@ import React from 'react';
 import { agregarToken } from './toolkit/slices/socialSice';
 import { useAppDispatch, useAppSelector } from './toolkit/store';
 import { routesStorage, userStorage } from './utilities/userStorage';
+import { readImagesExtraReduce } from './toolkit/slices/socialExtraReducers';
 
 export const rutas = {
     login: '/login',
@@ -72,6 +73,7 @@ export function MisRutas({ children }: Children) {
     React.useEffect(() => {
         if (stateSocial.token) {
             setCookies('myToken', stateSocial.token, { maxAge: 1000 });
+            dispatch(readImagesExtraReduce());
         }
     }, [stateSocial.token]);
     const Rutas = () => useRoutes(rutasLista(cookies.myToken));

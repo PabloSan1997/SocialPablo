@@ -29,19 +29,29 @@ export function Header() {
           className="text-green-50 ml-auto mr-5 text-lg hover:underline"
           onClick={() => navegar(rutas.create)}
         >Crear Cuenta</button>
-      ) : (
-        <button
-          className="text-green-50 ml-auto mr-5 text-lg hover:underline"
-          onClick={logout}
-        >Logout</button>
-      )}
+      ) : null}
       {locacion.pathname === rutas.create ? (
         <button
           className="text-green-50 ml-auto mr-5 text-lg hover:underline"
           onClick={() => navegar(rutas.login)}
         >Login</button>
       ) : null}
-
+      {
+        state.token ? (
+          (
+            <>
+              <button
+                className="text-green-50 ml-auto mr-5 text-lg hover:underline"
+                onClick={()=>navegar(rutas.profile)}
+              >{state.nickname}</button>
+              <button
+                className="text-green-50 ml-0 mr-5 text-base hover:underline"
+                onClick={logout}
+              >Logout</button>
+            </>
+          )
+        ) : null
+      }
     </header>
   );
 }

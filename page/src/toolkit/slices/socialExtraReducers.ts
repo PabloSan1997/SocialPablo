@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loginUser } from '../../Api/userApi';
+import { readImages } from '../../Api/readImage';
 
 
 export const loginExtraReducer = createAsyncThunk(
@@ -9,5 +10,13 @@ export const loginExtraReducer = createAsyncThunk(
         const data = await loginUser(login)
         return data;
 
+    }
+);
+
+export const readImagesExtraReduce = createAsyncThunk(
+    'readImagenes',
+    async (): Promise<ImagenInterface[]> => {
+        const imagenes = readImages();
+        return imagenes;
     }
 );
