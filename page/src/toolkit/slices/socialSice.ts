@@ -31,7 +31,8 @@ const initialState: InitialState = {
     nickname: userStorage.leer(),
     imagenes: [],
     imagen: initialImagen,
-    perfil: initialPerfil
+    perfil: initialPerfil,
+    textoError: ''
 };
 
 const socialSlice = createSlice({
@@ -40,6 +41,9 @@ const socialSlice = createSlice({
     reducers: {
         agregarToken(state, action: PayloadAction<{ token: string }>) {
             state.token = action.payload.token;
+        },
+        cambiarTextoError(state, action: PayloadAction<{ error: string }>) {
+            state.textoError = action.payload.error;
         }
     },
     extraReducers: (builder) => {
@@ -47,16 +51,18 @@ const socialSlice = createSlice({
             const res = action.payload as LoginRespose;
             state.token = res.token;
             state.nickname = res.nickname;
+            state.textoError = '';
             userStorage.guardar(res.nickname);
         });
-        builder.addCase(loginExtraReducer.rejected, (_state, action) => {
-            console.log(action.payload);
+        builder.addCase(loginExtraReducer.rejected, (state, action) => {
+            const texto = action.error.message;
+            state.textoError = texto ? texto : 'Error';
         });
     }
 });
 
 
 const socialReducer = socialSlice.reducer;
-const { agregarToken } = socialSlice.actions;
+const { agregarToken, cambiarTextoError } = socialSlice.actions;
 
-export { socialReducer, agregarToken }
+export { socialReducer, agregarToken, cambiarTextoError }

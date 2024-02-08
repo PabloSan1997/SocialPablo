@@ -25,7 +25,8 @@ interface InitialState {
     nickname: string,
     imagenes: ImagenInterface[],
     imagen: ImagenUna,
-    perfil: Perfil
+    perfil: Perfil,
+    textoError:string
 }
 
 interface ImagenInterface {

@@ -11,7 +11,7 @@ import { useCookies } from 'react-cookie';
 import React from 'react';
 import { agregarToken } from './toolkit/slices/socialSice';
 import { useAppDispatch, useAppSelector } from './toolkit/store';
-import { userStorage } from './utilities/userStorage';
+import { routesStorage, userStorage } from './utilities/userStorage';
 
 export const rutas = {
     login: '/login',
@@ -54,7 +54,7 @@ const rutasLista = (data: string) => [
     },
     {
         path: '/',
-        element: <Navigate to={data ? rutas.home : rutas.login} />
+        element: <Navigate to={data ? routesStorage.leer() : rutas.login} />
     }
 ];
 
@@ -70,7 +70,9 @@ export function MisRutas({ children }: Children) {
         }
     }, []);
     React.useEffect(() => {
-        setCookies('myToken', stateSocial.token, { maxAge: 1000 });
+        if (stateSocial.token) {
+            setCookies('myToken', stateSocial.token, { maxAge: 1000 });
+        }
     }, [stateSocial.token]);
     const Rutas = () => useRoutes(rutasLista(cookies.myToken));
     return (
