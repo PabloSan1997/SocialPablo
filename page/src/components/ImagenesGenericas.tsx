@@ -1,6 +1,6 @@
 
 
-export function ImagenGenerica({ url_image, image_description, usuario }: ImagenInterface) {
+export function ImagenGenerica({ url_image, image_description, usuario, comentario}: ImagenGenericaInterface) {
     const { nickname, username, url_perfil } = usuario;
     return (
         <div className="flex flex-col mb-10">
@@ -16,8 +16,9 @@ export function ImagenGenerica({ url_image, image_description, usuario }: Imagen
                 </div>
             </div>
             <p className="text-white text-[1rem] my-2">{image_description}</p>
-            <div className="flex flex-col w-full m-auto bg-miGris-900 py-3">
+            <div className="flex flex-col w-full m-auto bg-miGris-900 py-3 rounded-lg">
                 <img src={url_image} alt={nickname} className="max-w-[40%] m-auto"/>
+                <span className="text-white ml-5">Comentarios: {comentario}</span>
             </div>
         </div>
     )

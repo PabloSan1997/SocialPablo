@@ -15,7 +15,7 @@ export const loginExtraReducer = createAsyncThunk(
 
 export const readImagesExtraReduce = createAsyncThunk(
     'readImagenes',
-    async (): Promise<ImagenInterface[]> => {
+    async (): Promise<ImagenGenericaInterface[]> => {
         const imagenes = readImages();
         return imagenes;
     }

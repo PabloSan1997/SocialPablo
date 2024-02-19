@@ -23,7 +23,7 @@ interface LoginRespose {
 interface InitialState {
     token: string,
     nickname: string,
-    imagenes: ImagenInterface[],
+    imagenes: ImagenGenericaInterface[],
     imagen: ImagenUna,
     perfil: Perfil,
     textoError:string
@@ -34,6 +34,10 @@ interface ImagenInterface {
     image_description: string,
     url_image: string,
     usuario: UsuarioGen
+}
+
+interface ImagenGenericaInterface extends ImagenInterface{
+    comentario:number;
 }
 
 interface ImagenUna extends ImagenInterface {

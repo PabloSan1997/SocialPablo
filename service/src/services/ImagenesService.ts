@@ -20,7 +20,7 @@ export class ImagenesService {
 					usuario: true
 				}
 			});
-            
+
 			if (!imagenes) throw Boom.notFound('No se encontró infromacion');
 
 			const comentarios = await reComentario.find({
@@ -42,12 +42,14 @@ export class ImagenesService {
 		}
 		const imagenes = await reImagen.find({
 			relations: {
-				usuario: true
+				usuario: true,
+				comentario: true
 			}
 		});
 		const mostrar = imagenes.map(i => {
 			return {
 				...i,
+				comentario: i.comentario.length,
 				usuario: mostrarUsuarioUno(i.usuario)
 			};
 		});
