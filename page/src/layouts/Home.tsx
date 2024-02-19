@@ -14,7 +14,9 @@ export function Home() {
 
   if (!state.token) return <Redirigir ruta={rutas.login} />
   return (
-    <div>
+    <div
+    className='w-[80%] m-auto my-5'
+    >
       {state.imagenes.map(i=>(
         <ImagenGenerica key={i.id_imagen} {...i}/>
       ))}
