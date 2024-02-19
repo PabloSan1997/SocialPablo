@@ -33,7 +33,8 @@ interface ImagenInterface {
     id_imagen: string,
     image_description: string,
     url_image: string,
-    usuario: UsuarioGen
+    usuario: UsuarioGen;
+    createdAt:string;
 }
 
 interface ImagenGenericaInterface extends ImagenInterface{
@@ -47,7 +48,8 @@ interface ImagenUna extends ImagenInterface {
 interface ComentariosGen {
     id_comentario: string,
     comentario: string,
-    usuaeio: UsuarioGen
+    usuaeio: UsuarioGen;
+    createdAt:string;
 }
 
 interface UsuarioGen {
@@ -59,14 +61,18 @@ interface UsuarioGen {
 
 interface UsuarioInfo {
     descripcion: string,
-    id_user_info: string
+    id_user_info: string;
+    createdAt:string;
+    updateAt:string;
 }
 
 interface Perfil extends UsuarioGen {
     usuarioInfo: UsuarioInfo;
+    createdAt:string;
     imagenes: {
         id_imagen: string,
         image_description: string,
-        url_image: string
+        url_image: string,
+        createdAt:string;
     }[];
 }

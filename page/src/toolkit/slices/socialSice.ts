@@ -6,19 +6,24 @@ import { userStorage } from '../../utilities/userStorage';
 const initialImagen = {
     id_imagen: '', url_image: '', comentarios: [],
     image_description: '',
+    createdAt:'',
     usuario: {
         id_user: '',
         nickname: '',
         username: '',
-        url_perfil: ''
+        url_perfil: '',
+        createdAt:''
     }
 }
 
 const initialPerfil = {
     usuarioInfo: {
         descripcion: '',
-        id_user_info: ''
+        id_user_info: '',
+        createdAt:'',
+        updateAt:''
     },
+    createdAt:'',
     imagenes: [],
     id_user: '',
     username: '',
