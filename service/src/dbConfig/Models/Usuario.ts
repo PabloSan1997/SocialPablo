@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
 import { UsuarioInfo } from './UsuarioInfo';
 import { Imagen } from './Imagen';
 import { Comentario } from './Comentario';
@@ -21,6 +21,9 @@ export class Usuario implements UsuarioInterface {
 
     @Column({ length: 5000 })
     	url_perfil: string;
+
+    @CreateDateColumn()
+    	createdAt:Date;
 
     @OneToOne(() => UsuarioInfo, usuarioInfo => usuarioInfo.usuario, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'idInfo' })

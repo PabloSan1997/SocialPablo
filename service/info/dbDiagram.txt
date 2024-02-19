@@ -7,11 +7,14 @@ Table Usuario{
   password varchar(5000)
   url_perfil varchar(5000)
   idInfo interger
+  createdAt Date
 }
 
 Table UsuarioInfo{
   id_user_info serial [primary key]
   descripcion varchar(5000)
+  createdAt Date
+  updateAt Date
 }
 
 Table Imagen {
@@ -19,6 +22,7 @@ Table Imagen {
   image_description varchar(500)
   url_image varchar(5000)
   idUser interger
+  createdAt Date
 }
 
 Table Comentarios{
@@ -26,6 +30,7 @@ Table Comentarios{
   comentario varchar(500)
   idImagen interger
   idUser interger
+  createdAt Date
 }
 
 

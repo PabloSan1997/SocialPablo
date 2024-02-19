@@ -1,24 +1,27 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany, CreateDateColumn } from 'typeorm';
 import { Usuario } from './Usuario';
 import { Comentario } from './Comentario';
 
 
 @Entity()
-export class Imagen implements ImagenInterface{
+export class Imagen implements ImagenInterface {
     @PrimaryGeneratedColumn('uuid')
     	id_imagen: string;
 
-    @Column({length:500})
+    @Column({ length: 500 })
     	image_description: string;
 
-    @Column({length:5000})
+    @Column({ length: 5000 })
     	url_image: string;
 
-    @ManyToOne(()=>Usuario, usuario => usuario.usuarioInfo, {onDelete:'CASCADE'})
-    @JoinColumn({name:'idUser'})
-    	usuario:Usuario;
+    @CreateDateColumn()
+    	createdAt: Date;
 
-    @OneToMany(()=>Comentario, comentario => comentario.imagenes)
-    	comentario:Comentario[];
+    @ManyToOne(() => Usuario, usuario => usuario.usuarioInfo, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'idUser' })
+    	usuario: Usuario;
+
+    @OneToMany(() => Comentario, comentario => comentario.imagenes)
+    	comentario: Comentario[];
 }

@@ -37,6 +37,8 @@ interface UsuarioInfoDto {
 interface UsuarioInfoInterface {
     id_user_info: string;
     descripcion: string;
+    createdAt:Date;
+    updateAt:Date;
 }
 
 
@@ -60,6 +62,7 @@ interface ImagenInterface {
     id_imagen: string;
     image_description: string;
     url_image: string;
+    createdAt:Date;
 }
 
 interface ImagenRelationUser extends ImagenInterface {

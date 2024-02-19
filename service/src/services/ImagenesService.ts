@@ -41,6 +41,9 @@ export class ImagenesService {
 			return imagen;
 		}
 		const imagenes = await reImagen.find({
+			order:{
+				createdAt:'DESC'
+			},
 			relations: {
 				usuario: true,
 				comentario: true
