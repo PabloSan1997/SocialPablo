@@ -17,32 +17,31 @@ export class ImagenesService {
 			const imagenes = await reImagen.findOne({
 				where: { id_imagen },
 				relations: {
-					usuario: true
+					usuario: true,
+					comentario: {
+						usuario: true,
+					}
 				}
 			});
 
 			if (!imagenes) throw Boom.notFound('No se encontró infromacion');
 
-			const comentarios = await reComentario.find({
-				where: { imagenes: imagenes },
-				relations: { usuario: true }
+			const comentarios = imagenes.comentario.map(c => {
+				return { ...c, usuario: mostrarUsuarioUno(c.usuario) };
 			});
-			const comentariosMostrar = comentarios.map(c => {
-				return {
-					...c,
-					usuario: mostrarUsuarioUno(c.usuario)
-				};
-			});
+
 			const imagen = {
 				...imagenes,
 				usuario: mostrarUsuarioUno(imagenes.usuario),
-				comentarios: comentariosMostrar
+				comentarios: comentarios
 			};
-			return imagen;
+			const respuesta = {...imagen} as Partial<Imagen>;
+			delete respuesta.comentario;
+			return respuesta;
 		}
 		const imagenes = await reImagen.find({
-			order:{
-				createdAt:'DESC'
+			order: {
+				createdAt: 'DESC'
 			},
 			relations: {
 				usuario: true,
