@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loginUser } from '../../Api/userApi';
-import { readImages } from '../../Api/readImage';
+import { readImages, readOneImagen } from '../../Api/readImage';
 
 
 export const loginExtraReducer = createAsyncThunk(
@@ -17,6 +17,14 @@ export const readImagesExtraReduce = createAsyncThunk(
     'readImagenes',
     async (): Promise<ImagenGenericaInterface[]> => {
         const imagenes = readImages();
+        return imagenes;
+    }
+);
+
+export const readOneImageExtraReduce = createAsyncThunk(
+    'readOneImage',
+    async ({ id_imagen }: { id_imagen: string }): Promise<ImagenUna> => {
+        const imagenes = await readOneImagen(id_imagen);
         return imagenes;
     }
 );

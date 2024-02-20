@@ -21,7 +21,8 @@ export const rutas = {
     profileid: '/profile/:username',
     create: '/create',
     addImage: '/addImage',
-    image: '/image/:id_imagen'
+    image: '/image/:id_imagen',
+    imageUse: '/image/'
 }
 
 const rutasLista = (data: string) => [
@@ -48,6 +49,10 @@ const rutasLista = (data: string) => [
     {
         path: rutas.addImage,
         element: <AddImage />
+    },
+    {
+        path: rutas.image,
+        element: <Imagefull />
     },
     {
         path: rutas.image,

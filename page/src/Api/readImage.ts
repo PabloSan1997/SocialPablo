@@ -9,3 +9,9 @@ export async function readImages():Promise<ImagenGenericaInterface[]>{
     const imagenes = ft.json();
     return imagenes;
 }
+
+export async function readOneImagen(id_imagen: string){
+    const ft = await fetch(`${imagenApi}/${id_imagen}`);
+    if(!ft.ok) throw 'Not found';
+    return ft.json();
+}

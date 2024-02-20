@@ -26,7 +26,7 @@ interface InitialState {
     imagenes: ImagenGenericaInterface[],
     imagen: ImagenUna,
     perfil: Perfil,
-    textoError:string
+    textoError: string
 }
 
 interface ImagenInterface {
@@ -34,11 +34,11 @@ interface ImagenInterface {
     image_description: string,
     url_image: string,
     usuario: UsuarioGen;
-    createdAt:string;
+    createdAt: string;
 }
 
-interface ImagenGenericaInterface extends ImagenInterface{
-    comentario:number;
+interface ImagenGenericaInterface extends ImagenInterface {
+    comentario: number;
 }
 
 interface ImagenUna extends ImagenInterface {
@@ -48,8 +48,8 @@ interface ImagenUna extends ImagenInterface {
 interface ComentariosGen {
     id_comentario: string,
     comentario: string,
-    usuaeio: UsuarioGen;
-    createdAt:string;
+    usuario: UsuarioGen;
+    createdAt: string;
 }
 
 interface UsuarioGen {
@@ -62,17 +62,25 @@ interface UsuarioGen {
 interface UsuarioInfo {
     descripcion: string,
     id_user_info: string;
-    createdAt:string;
-    updateAt:string;
+    createdAt: string;
+    updateAt: string;
 }
 
 interface Perfil extends UsuarioGen {
     usuarioInfo: UsuarioInfo;
-    createdAt:string;
+    createdAt: string;
     imagenes: {
         id_imagen: string,
         image_description: string,
         url_image: string,
-        createdAt:string;
+        createdAt: string;
     }[];
+}
+
+
+interface PerfilImagenInfo {
+    url_perfil: string,
+    nickname: string,
+    username: string,
+    createdAt: string
 }
